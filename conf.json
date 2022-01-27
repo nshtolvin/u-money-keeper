@@ -1,0 +1,5 @@
+{
+  "PROJECT_NAME": "U-Money-Keeper",
+  "VERSION": "1.0.0",
+  "DB_FILENAME": "data\\finance.db"
+}

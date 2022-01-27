@@ -1,0 +1,50 @@
+# -*- coding: utf-8 -*-
+#
+
+#:import AccountsScreen libs.uix.baseclass.accounts_screen.AccountsScreen
+#:import CategoriesScreen libs.uix.baseclass.categories_screen.CategoriesScreen
+#:import TransactionsScreen libs.uix.baseclass.transactions_screen.TransactionsScreen
+#:import StatisticsScreen libs.uix.baseclass.statistics_screen.StatisticsScreen
+
+
+<MainScreen>:
+    name: 'main'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDBottomNavigation:
+            id: bottom_nav_panel
+
+            MDBottomNavigationItem:
+                name: 'CategoriesScreen'
+                text: 'Categories'
+                icon: 'chart-arc'
+#                on_tab_press: app.on_tab_press(*args)
+
+                CategoriesScreen:
+                    id: categories_screen
+
+#            MDBottomNavigationItem:
+#                name: 'AccountsScreen'
+#                text: 'Accounts'
+#                icon: 'wallet'
+#
+#                AccountsScreen:
+#                    id: accounts_screen
+
+            MDBottomNavigationItem:
+                name: 'TransactionsScreen'
+                text: 'Transactions'
+                icon: 'clipboard-text'
+                
+                TransactionsScreen:
+                    id: transactions_screen
+
+            MDBottomNavigationItem:
+                name: 'StatisticsScreen'
+                text: 'Statistics'
+                icon: 'chart-areaspline'
+                
+                StatisticsScreen:
+                    id: statistics_screen

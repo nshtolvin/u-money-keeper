@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+#
+
+#:import CustomLeftIconButton libs.uix.lists_items_lib.CustomLeftIconButton
+#:import PieChart libs.uix.baseclass.piechart.PieChart
+
+
+<CategoriesScreen>:
+    name: 'categories'
+
+    MDBoxLayout:
+        id: categories_box_layout
+        orientation: 'horizontal'
+
+        # left group of buttons
+        ScrollView:
+            id: left_btn_gr
+            size_hint: (.65, 1)
+
+            MDList:
+                id: left_btn_list
+
+#                CustomLeftIconButton:
+#                    id: 'home'/'basket'/'cellphone'/'briefcase'/'car'/'heart-pulse'/'school'/'gift'/'filmstrip'
+#                    icon: 'home'/'basket'/'cellphone'/'briefcase'/'car'/'heart-pulse'/'school'/'gift'/'filmstrip'
+#                    text: 'Дом'
+#                    secondary_text: '0'
+#                    events_callback: app.no_action_function
+
+        # center area with pie chart
+        MDBoxLayout:
+            id: central_group
+            orientation: 'vertical'
+
+            MDLabel:
+                id: lbl_total
+                text: 'Расходы: %.2f' % (0)
+                font_style: 'Subtitle1'
+                halign: 'center'
+                size_hint: (1, .15)
+
+            PieChart:
+                id: pie_chart
+                size_hint: (1, .85)
+
+        # right group of buttons
+        ScrollView:
+            id: right_btn_gr
+            size_hint: (.65, 1)
+
+            MDList:
+                id: right_btn_list
+
+#                CustomLeftIconButton:
+#                    id: cash-plus
+#                    icon: 'cash-plus'
+#                    text: 'Поступления'
+#                    secondary_text: '0'
+#                    events_callback: app.no_action_function

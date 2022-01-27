@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+#
+
+#:import BarChart libs.uix.baseclass.barchart.BarChart
+#:import LineChart libs.uix.baseclass.linechart.LineChart
+
+
+<StatisticsScreen>:
+    name: 'statistics'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        BarChart:
+            id: bar_chart
+            size_hint: (1, .5)
+
+        LineChart:
+            id: line_chart
+            size_hint: (1, .5)

@@ -1,0 +1,113 @@
+# -*- coding: utf-8 -*-
+#
+
+#:import os os
+#:import CustomNavDrawerButton libs.uix.lists_items_lib.CustomNavDrawerButton
+
+
+# template of Labels
+<ScrollViewLabel@MDLabel>:
+    halign: 'left'
+    font_size: '14sp'
+    bold: True
+    color: app.theme_cls.primary_color
+    size_hint_y: None
+    height: dp(25)
+
+
+<NavDrawer>:
+    orientation: 'vertical'
+
+    BoxLayout:
+        id: avatar_box
+        orientation: 'vertical'
+        size_hint: (1, .25)  # занимет 100% пространства по ширине и 30% по высоте
+        padding: dp(10)
+        spacing: dp(5)
+
+        canvas:
+            Color:
+                rgba: app.theme_cls.primary_color
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        AnchorLayout:
+            id: nav_avatar_layout
+            anchor_x: 'left'
+            size_hint_y: None
+            height: nav_avatar.height + dp(10)
+
+            Image:
+                id: nav_avatar
+                size_hint: None, None
+                size: dp((avatar_box.height * 35) // 100), dp((avatar_box.height * 35) // 100)
+                source: 'data/images/icon.png'
+
+        MDLabel:
+            text: app.title
+            font_style: 'Subtitle2'
+            adaptive_height: True
+
+        MDLabel:
+            text: app.version
+            font_style: 'Caption'
+            adaptive_height: True
+
+    ScrollView:
+        id: nav_scroll_view
+        size_hint_y: .75
+
+        GridLayout:
+            cols: 1
+            size_hint: 1, None
+            padding: dp(10)
+
+            ScrollViewLabel:
+                text: 'Settings'
+
+            CustomNavDrawerButton:
+                icon: 'web'
+                text: 'Language'
+                events_callback: app.select_locale
+
+            CustomNavDrawerButton:
+                icon: 'brush'
+                text: 'Theme'
+                events_callback: app.show_notification
+
+            MDSeparator:
+
+            ScrollViewLabel:
+                text: 'Data'
+
+            CustomNavDrawerButton:
+                icon: 'cloud-upload'
+                text: 'Data backup'
+                events_callback: app.show_notification
+
+            CustomNavDrawerButton:
+                icon: 'database-export'
+                text: 'Export to CSV'
+                events_callback: app.show_notification
+
+            CustomNavDrawerButton:
+                icon: 'delete'
+                text: 'Delete data'
+                events_callback: app.show_notification
+
+            MDSeparator:
+
+            ScrollViewLabel:
+                text: 'About'
+
+            CustomNavDrawerButton:
+                icon: 'language-python'
+                text: 'License'
+                events_callback: app.show_license
+
+            CustomNavDrawerButton:
+                icon: 'information'
+                text: 'About'
+                events_callback: app.show_about
+

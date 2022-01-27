@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+#
+
+#:import CustomTransactionsIconButton libs.uix.lists_items_lib.CustomTransactionsIconButton
+
+
+<TransactionsScreen>:
+    name: 'transactions'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        ScrollView:
+            pos_hint: {'center_x': .5}
+            size_hint_x: None
+            width: '300dp'
+
+            MDList:
+                id: transactions_btn_list
+
+#                CustomTransactionsIconButton:
+#                    id: 'home'  #/'basket'/'cellphone'/'briefcase'/'car'/'heart-pulse'/'school'/'gift'/'filmstrip'
+#                    icon: 'home'    #/'basket'/'cellphone'/'briefcase'/'car'/'heart-pulse'/'school'/'gift'/'filmstrip'
+#                    text: 'Дом'
+#                    secondary_text: ' '*40+'1111'
+#                    tertiary_text: '0000'
+#                    events_callback: app.no_action_function

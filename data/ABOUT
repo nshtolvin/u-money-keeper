@@ -1,0 +1,13 @@
+[size=20][b]U-Money-Keeper[/b][/size]
+
+[b]Version:[/b] {version}
+
+[b]License:[/b] MIT
+
+[size=20][b]Developer[/b][/size]
+[ref=SITE_PROJECT]
+[color={link_color}]NAME_AUTHOR[/color][/ref]
+
+[b]Source code:[/b] 
+[ref=REPO_PROJECT]
+[color={link_color}]GitHub[/color][/ref]
