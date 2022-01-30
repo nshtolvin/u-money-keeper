@@ -250,7 +250,26 @@ class SQLWorker:
         """
         query = \
             f"""
-            INSERT INTO Transactions (AccountId, CategoryId, DateKey, TransactionScore, TransactionNote)
+            INSERT INTO Transactions (CategoryId, DateKey, TransactionScore, TransactionNote)
             VALUES {transaction_data}
+            """
+        return self.__execute_sql_request(query)
+
+    def update_transaction_data(self, transaction_data):
+        """
+        Метод, используемый для добавления новых транзакци с расходами в БД.
+        @param transaction_data: данные о новых расходах. CategoryId - идентификатор категории расходов, DateKey -
+        идентификатор даты транзакции, TransactionScore - сумма транзакции, TransactionNote - заметка к транзакции)
+        @return: None
+        """
+        query = \
+            f"""
+            UPDATE Transactions
+            SET
+                CategoryId = {transaction_data[0]},
+                DateKey = '{transaction_data[1]}',
+                TransactionScore = {transaction_data[2]},
+                TransactionNote = '{transaction_data[3]}'
+            WHERE TransactionId = {transaction_data[4]}
             """
         return self.__execute_sql_request(query)

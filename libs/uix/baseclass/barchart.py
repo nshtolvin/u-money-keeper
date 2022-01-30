@@ -45,7 +45,7 @@ class BarChart(Screen):
         # bottom_sum - накопительный массив, в котором содержится начальная высота, с которой нчинается
         # следующая часть накопительного столбца
         bottom_sum = chart_data["data"][0].copy()
-        plt.bar(chart_data["dates"], chart_data["data"][0], color=chart_data["colors"][0])
+        plt.bar(chart_data["dates"], chart_data["data"][0], color=chart_data["colors"][0], width=0.4)
         for ind in range(1, len(chart_data["data"])):
             plt.bar(chart_data["dates"],
                     chart_data["data"][ind],

@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74aca4be-ac82-41f9-a90c-35ffb1b3e530" name="Default Changelist" comment="" />
+    <list default="true" id="74aca4be-ac82-41f9-a90c-35ffb1b3e530" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/finance.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/finance.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/sql_scripts/sql_create_transactions_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/libs/sql_scripts/sql_create_transactions_table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/sql_worker_lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/sql_worker_lib.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/uix/baseclass/barchart.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/uix/baseclass/barchart.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/uix/baseclass/consumptionentry_sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/uix/baseclass/consumptionentry_sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/uix/lists_items_lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/uix/lists_items_lib.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/program.py" beforeDir="false" afterPath="$PROJECT_DIR$/program.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +26,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="git@github.com:nshtolvin/u-money-keeper.git" />
+      </set>
+    </option>
   </component>
   <component name="ProjectId" id="1ySUg69nOvy4PaQhDsX3ugMnzde" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -98,6 +115,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="275" y="22" key="#Inspections" timestamp="1643458577824">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="22" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1643458577824" />
     <state x="445" y="159" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1642940955226">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -114,22 +135,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1637496365754" />
-    <state width="1345" height="123" key="GridCell.Tab.0.bottom" timestamp="1643278344333">
+    <state width="1345" height="123" key="GridCell.Tab.0.bottom" timestamp="1643549903713">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="123" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1643278344333" />
-    <state width="1345" height="123" key="GridCell.Tab.0.center" timestamp="1643278344332">
+    <state width="1345" height="123" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1643549903713" />
+    <state width="1345" height="123" key="GridCell.Tab.0.center" timestamp="1643549903713">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="123" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1643278344332" />
-    <state width="1345" height="123" key="GridCell.Tab.0.left" timestamp="1643278344332">
+    <state width="1345" height="123" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1643549903713" />
+    <state width="1345" height="123" key="GridCell.Tab.0.left" timestamp="1643549903713">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="123" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1643278344332" />
-    <state width="1345" height="123" key="GridCell.Tab.0.right" timestamp="1643278344332">
+    <state width="1345" height="123" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1643549903713" />
+    <state width="1345" height="123" key="GridCell.Tab.0.right" timestamp="1643549903713">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="123" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1643278344332" />
+    <state width="1345" height="123" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1643549903713" />
     <state width="1345" height="237" key="GridCell.Tab.1.bottom" timestamp="1642338358737">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -150,9 +171,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1643270831471" />
-    <state x="346" y="49" key="search.everywhere.popup" timestamp="1641472411887">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1643463153989">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1641472411887" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1643463153989" />
   </component>
 </project>

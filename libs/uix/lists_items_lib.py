@@ -2,7 +2,6 @@
 #
 
 # region Import
-
 from kivy.uix.image import Image
 from kivy.lang import Builder
 from kivy.properties import (
@@ -22,6 +21,7 @@ from kivymd.uix.list import (
     ThreeLineIconListItem,
 )
 from kivymd.uix.label import MDLabel
+from kivymd.uix.card import MDCardSwipe
 # endregion Import
 
 
@@ -49,8 +49,16 @@ class CustomLeftIconButton(TwoLineIconListItem, ThemableBehavior):
 
 class CustomTransactionsIconButton(ThreeLineIconListItem, ThemableBehavior):
     icon = StringProperty()
-    transaction_id = StringProperty()
     events_callback = ObjectProperty()
+
+
+class NewCustomTransactionsIconButton(MDCardSwipe, ThemableBehavior):
+    icon = StringProperty()
+    text = StringProperty()
+    secondary_text = StringProperty()
+    tertiary_text = StringProperty()
+    events_callback = ObjectProperty()
+    delete_callback = ObjectProperty()
 
 
 class ScrollViewLabel(MDLabel, ThemableBehavior):
@@ -90,6 +98,36 @@ kv_description = \
     IconLeftWidget:
         icon: root.icon
         text_color: root.text_color
+
+
+<NewCustomTransactionsIconButton>:
+    size_hint_y: None
+    height: btn.height
+
+    MDCardSwipeLayerBox:
+        padding: '8dp'
+        MDIconButton:
+            icon: 'trash-can'
+            pos_hint: {'center_y': .5}
+            on_release: root.delete_callback()
+
+    MDCardSwipeFrontBox:
+        
+        ThreeLineIconListItem:
+            id: btn
+            text: root.text
+            secondary_text: root.secondary_text
+            tertiary_text: root.tertiary_text
+            divider: None
+            text_color: self.theme_cls.text_color
+            secondary_theme_text_color: 'Custom'
+            secondary_text_color: '#f01111'
+            bg_color: '#fafafa'
+            _no_ripple_effect: True
+            on_release: root.events_callback()
+            
+            IconLeftWidget:
+                icon: root.icon
 
 
 <ScrollViewLabel>:

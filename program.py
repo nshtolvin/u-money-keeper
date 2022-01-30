@@ -17,15 +17,15 @@ from kivy.properties import ObjectProperty, StringProperty
 from kivymd.app import MDApp
 from kivymd.toast import toast
 from kivymd.uix.card import MDSeparator
+from libs.uix.lists_items_lib import (CustomLeftIconButton, CustomTransactionsIconButton,
+                                      NewCustomTransactionsIconButton, ScrollViewLabel)
 
 from main import cur_directory
 # from libs.translation_lib import Translation
 from libs.uix.baseclass.rootscreen import RootScreen
 from libs.uix.lists import Lists
 from libs.applibs.dialogs import card
-
 from libs.sql_worker_lib import SQLWorker
-from libs.uix.lists_items_lib import CustomLeftIconButton, CustomTransactionsIconButton, ScrollViewLabel
 # endregion Import
 
 
@@ -65,13 +65,16 @@ class MainApp(MDApp):
         # объект, в котором хранятся данные о странице ввода расходов (содержит цифровую клавиатуру,
         # окна ввода суммы расходов и заметок)
         self.__consumption_entry_sheet = None
+        # назначение страницы ввода расходов ('new' - новые данные/ 'edit' - изменение транзакции)
+        self.__consumption_sheet_purpose = None
+        # данные редактируемой транзакции (только для self.__consumption_sheet_purpose=='edit'
+        self.__edited_transaction_data = None
         # картеж с данными о категории расходов, траты по которой записываются в БД приложения - (ctg_id, ctg_name)
         self.__current_category = None
         # Картеж из двух дат: (первый день месяца, последний день месяца). По умолчанию эти даты рассчитываются
         # исходя из текщего месяца. Поле может быть изменено при обращении к календарю и выбору произвольной даты -
         # значения картежа автоматически будут пересчитаны
         self.__current_date = None
-        self.__main_screen = None
 
     def build(self):
         """
@@ -90,8 +93,8 @@ class MainApp(MDApp):
         self.nav_drawer = self.__app_screen.ids.nav_drawer
         return self.__app_screen
 
-    def get_application_config(self):
-        return super(MainApp, self).get_application_config('{}/%(appname)s.ini'.format(self.directory))
+    # def get_application_config(self):
+    #     return super(MainApp, self).get_application_config('{}/%(appname)s.ini'.format(self.directory))
 
     def build_config(self, config):
         config.adddefaultsection('General')
@@ -318,7 +321,10 @@ class MainApp(MDApp):
                     text=rec[1],
                     secondary_text=str(rec[3]),
                     # events_callback=lambda x: self.show_consumption_entry_sheet(rec[1])
-                    events_callback=partial(self.show_consumption_entry_sheet, rec[1])
+                    # events_callback=partial(self.show_consumption_entry_sheet, rec[1])
+                    events_callback=partial(self.show_consumption_entry_sheet, 'new',
+                                            {"transaction_date": None,
+                                             "category": rec[1]})
                 )
             )
             # если по категории были потрачены средства, то добавляем данную категорию
@@ -340,6 +346,7 @@ class MainApp(MDApp):
         @return: None
         """
         from datetime import datetime
+        from functools import partial
 
         transactions_btn_list = self.root.ids.main.ids.transactions_screen.ids.transactions_btn_list
         transactions_btn_list.clear_widgets()
@@ -354,15 +361,18 @@ class MainApp(MDApp):
                 separator_date = curr_date   # одновляем разделительную дату
             # добавляем кнопки с транзакциями
             transactions_btn_list.add_widget(
-                CustomTransactionsIconButton(
+                NewCustomTransactionsIconButton(
                     icon=rec[0],
                     text=rec[1],
                     secondary_text=str(-1 * rec[2]),
                     tertiary_text=rec[3],
-                    events_callback=self.edit_transaction_data,
-                    transaction_id=str(rec[4])
-                    # events_callback=lambda x: self.show_consumption_entry_sheet(rec[1])
-                    # events_callback=partial(self.show_consumption_entry_sheet, rec[1])
+                    events_callback=partial(self.show_consumption_entry_sheet, 'edit',
+                                            {"transaction_id": rec[4],
+                                             "transaction_date": separator_date,
+                                             "category": rec[1],
+                                             "cost": str(rec[2]),
+                                             "note": rec[3]}),
+                    delete_callback=self.show_notification
                 )
             )
 
@@ -444,19 +454,34 @@ class MainApp(MDApp):
         if len(chart_data["categories_names"]) != 0:
             self.root.ids.main.ids.statistics_screen.ids.line_chart.update_chart(chart_data)
 
-    def edit_transaction_data(self, *args):
-        # TODO: возможность редактирования транзакций
-        toast('Transaction editing will be added soon')
-
-    def show_consumption_entry_sheet(self, category_name):
-        """Метод для вызова окна ввода данных о расходах (сумма расходов, заметки)"""
+    def show_consumption_entry_sheet(self, purpose, data):
+        """
+        Метод вызова окна ввода/редактирования данных о расходах (сумма расходов, заметки)
+        @param purpose: назначение окна ввода (new - ввод новой транзакции расходов, edit - изменение данных)
+        @param data: словарь с параметрами для инициализации окна ввода. Ключи:
+        transaction_id - идентификатор редактируемой транзакции из БД приложения (только для purpose==edit)
+        transaction_date - дата совершения транзакции (только для purpose==edit)
+        category - наименование категории расходов
+        cost - сумма расходов (0 для новой транзакции, иначе - значение транзакции с указанным transaction_id)
+        note - заметка (пусто для новой транзакции, иначе - значение транзакции с указанным transaction_id)
+        @return: None
+        """
         from kivymd.uix.bottomsheet import MDCustomBottomSheet
         from libs.uix.baseclass.consumptionentry_sheet import СonsumptionEntrySheet
 
+        # и нициализация и вызов окна для ввода/редактирования данных транзакциии
         self.__consumption_entry_sheet = MDCustomBottomSheet(screen=СonsumptionEntrySheet())
         self.__consumption_entry_sheet.open()
-        self.__current_category = self.__sql_worker.get_category_id(category_name)[0]
+        self.__current_category = self.__sql_worker.get_category_id(data["category"])[0]
+        # при добавлении новой транзакции добавляем только лейбел с наименование категории расходов
         self.__consumption_entry_sheet.screen.ids.lbl_consumption_category.text = self.__current_category[1]
+        # при редактировании расходов на окно ввода/редактирования переносятся сумма расходов и заметки
+        if purpose == 'edit':
+            self.__consumption_entry_sheet.screen.ids.lbl_consumption.text = data["cost"]
+            self.__consumption_entry_sheet.screen.ids.transaction_note.text = data["note"]
+        # параметры окна ввода/редактирования данных о расходах сохраняем
+        self.__consumption_sheet_purpose = purpose
+        self.__edited_transaction_data = data.copy()
     
     def update_consumption_value(self, symbol):
         """
@@ -472,30 +497,36 @@ class MainApp(MDApp):
             cons_value = cons_value[:len(cons_value)-1]
         elif symbol == 'OK':
             import datetime
-            from calendar import monthrange
 
-            # TODO: изменить перед отправкой на github
-            current_date = datetime.date.today()
-            # current_date = datetime.date(2021, 12, 23)
-            transaction_data = (1,
-                                self.__current_category[0],
-                                current_date.strftime("%Y%m%d"),
+            # параметры отбработчика кнопки OK. Зависят от того вводились новые данные о расходах (ключ 'new') или
+            # редактировались (ключ 'edit') уже существующие данные
+            # date - дата транзакции (для новых - ссегодняшняя дата, для редактировани - дата из БД)
+            # func - имя вызываемой функции (для создания новой записи в БД или редактирования существующей)
+            # msg - выводимый результат выполнения операции
+            options = {"new": {"date": datetime.date.today(),
+                               "func": self.__sql_worker.insert_new_transaction_data,
+                               "msg": 'Data added!'},
+                       "edit": {"date": self.__edited_transaction_data["transaction_date"],
+                                "func": self.__sql_worker.update_transaction_data,
+                                "msg": 'Data updated!'}
+                       }
+            # формируем картеж с данными о расходах
+            transaction_data = (self.__current_category[0],
+                                options[self.__consumption_sheet_purpose]["date"].strftime("%Y%m%d"),
                                 round(float(cons_value)),
                                 self.__consumption_entry_sheet.screen.ids.transaction_note.text)
+            # при редактировании транзакции последним (4ым элементом) добавляем id редактируемой транзакции из БД
+            if self.__consumption_sheet_purpose == 'edit':
+                transaction_data = transaction_data + (self.__edited_transaction_data["transaction_id"],)
+
             if transaction_data[3] != 0:
-                result = self.__sql_worker.insert_new_transaction_data(transaction_data)
+                # result = self.__sql_worker.insert_new_transaction_data(transaction_data)
+                result = options[self.__consumption_sheet_purpose]["func"](transaction_data)
             else:
                 result = [-1]
-            toast('Data added!' if len(result) == 0 else
+            toast(options[self.__consumption_sheet_purpose]["msg"] if len(result) == 0 else
                   'Error! Perhaps a null value was entered. Something went wrong.')
 
-            # today = datetime.datetime.today()
-            # month_range = monthrange(today.year, today.month)
-            # transactions = self.__sql_worker.make_select_for_categories_screen(
-            #     from_date=datetime.date(today.year, today.month, 1),
-            #     to_date=datetime.date(today.year, today.month, month_range[1])
-            # )
-            # self.__update_categories_screen(transactions)
             self.__update_application_screens()
 
             self.__consumption_entry_sheet.dismiss()

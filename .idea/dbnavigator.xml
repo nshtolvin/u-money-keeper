@@ -24,7 +24,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="9b03b86d-a7d2-451f-85ac-c49bb29c6524">
+        <schema name="main" object-types="table, column" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="9b03b86d-a7d2-451f-85ac-c49bb29c6524">
@@ -44,9 +48,9 @@
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
-    <mapping file-url="file://$PROJECT_DIR$/backup/test_insert.sql" connection-id="9b03b86d-a7d2-451f-85ac-c49bb29c6524" session-id="MAIN" current-schema="main" />
     <mapping file-url="file://$PROJECT_DIR$/backup/test_select.sql" connection-id="9b03b86d-a7d2-451f-85ac-c49bb29c6524" session-id="MAIN" current-schema="main" />
     <mapping file-url="file://$PROJECT_DIR$/libs/sql_scripts/sql_initial_insert_into_categories.sql" connection-id="" session-id="MAIN" current-schema="" />
+    <mapping file-url="file://$PROJECT_DIR$/backup/test_insert.sql" connection-id="9b03b86d-a7d2-451f-85ac-c49bb29c6524" session-id="MAIN" current-schema="main" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />

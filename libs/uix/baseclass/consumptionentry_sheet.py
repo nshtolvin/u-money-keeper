@@ -7,4 +7,4 @@ from kivymd.uix.boxlayout import MDBoxLayout
 
 
 class СonsumptionEntrySheet(MDBoxLayout):
-    pass  
+    pass
