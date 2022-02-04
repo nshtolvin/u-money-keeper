@@ -5,11 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/finance.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/finance.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/sql_scripts/sql_create_transactions_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/libs/sql_scripts/sql_create_transactions_table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/sql_scripts/sql_initial_insert_into_categories.sql" beforeDir="false" afterPath="$PROJECT_DIR$/libs/sql_scripts/sql_initial_insert_into_categories.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/sql_worker_lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/sql_worker_lib.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/uix/baseclass/barchart.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/uix/baseclass/barchart.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/uix/baseclass/consumptionentry_sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/uix/baseclass/consumptionentry_sheet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/uix/lists_items_lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/uix/lists_items_lib.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/program.py" beforeDir="false" afterPath="$PROJECT_DIR$/program.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +48,7 @@
       <recent name="D:\Projects\AccountingOfFinance\data" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AccountingOfFinance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -73,31 +70,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AccountingOfFinance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -119,6 +94,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1643458577824" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1643911521616">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1643911521616" />
     <state x="445" y="159" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1642940955226">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -135,22 +114,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1637496365754" />
-    <state width="1345" height="123" key="GridCell.Tab.0.bottom" timestamp="1643549903713">
+    <state width="1345" height="123" key="GridCell.Tab.0.bottom" timestamp="1643976573766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="123" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1643549903713" />
-    <state width="1345" height="123" key="GridCell.Tab.0.center" timestamp="1643549903713">
+    <state width="1345" height="123" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1643976573766" />
+    <state width="1345" height="123" key="GridCell.Tab.0.center" timestamp="1643976573766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="123" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1643549903713" />
-    <state width="1345" height="123" key="GridCell.Tab.0.left" timestamp="1643549903713">
+    <state width="1345" height="123" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1643976573766" />
+    <state width="1345" height="123" key="GridCell.Tab.0.left" timestamp="1643976573766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="123" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1643549903713" />
-    <state width="1345" height="123" key="GridCell.Tab.0.right" timestamp="1643549903713">
+    <state width="1345" height="123" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1643976573766" />
+    <state width="1345" height="123" key="GridCell.Tab.0.right" timestamp="1643976573766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="123" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1643549903713" />
+    <state width="1345" height="123" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1643976573766" />
     <state width="1345" height="237" key="GridCell.Tab.1.bottom" timestamp="1642338358737">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -171,9 +150,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1643270831471" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1643463153989">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1643908655514">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1643463153989" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1643908655514" />
   </component>
 </project>

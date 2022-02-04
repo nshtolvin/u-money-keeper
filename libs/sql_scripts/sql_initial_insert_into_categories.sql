@@ -2,7 +2,7 @@
 INSERT INTO Categories (CategoryId, CategoryName, Icon, CategoryColor, Description, FlowType)
 VALUES (1, 'Home', 'home', 'darkgreen', 'Household expenses', -1)
     ,(2, 'Food', 'basket', 'royalblue', NULL, -1)
-    ,(3, 'Subscriptions and payments', 'cellphone', 'darkmagenta', NULL, -1)
+    ,(3, 'Subscriptions & paymt', 'cellphone', 'darkmagenta', NULL, -1)
     ,(4, 'Purchases', 'briefcase', 'saddlebrown', NULL, -1)
     ,(5, 'Transport', 'car', 'gold', 'Car expenses, public transport, etc.', -1)
     ,(6, 'Health', 'heart-pulse', 'seagreen', NULL, -1)

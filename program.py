@@ -36,6 +36,7 @@ class MainApp(MDApp):
     nav_drawer = ObjectProperty()
     lang = StringProperty('en')
 
+    # default constructor
     def __init__(self, configurations, **kwargs):
         # base class initialization
         super(MainApp, self).__init__(**kwargs)
@@ -372,7 +373,12 @@ class MainApp(MDApp):
                                              "category": rec[1],
                                              "cost": str(rec[2]),
                                              "note": rec[3]}),
-                    delete_callback=self.show_notification
+                    delete_callback=partial(self.show_confirm_dialog_to_delete,
+                                            {"transaction_id": rec[4],
+                                             "transaction_date": separator_date,
+                                             "category": rec[1],
+                                             "cost": str(rec[2]),
+                                             "note": rec[3]})
                 )
             )
 
@@ -546,6 +552,46 @@ class MainApp(MDApp):
         if len(cons_value) == 0 or cons_value == '0':
             cons_value = '0'
         self.__consumption_entry_sheet.screen.ids.lbl_consumption.text = cons_value
+
+    def show_confirm_dialog_to_delete(self, data):
+        """
+        Метод для осуществления удаления выбранной транзакции с расходами. Перед удалением появляется окно
+        подтверждения операции. При положительном ответе пользователя транзакция удаляется, в остальных случаях - нет.
+        @param data: словарь с параметрами удаляемой транзакции расходов. Ключи:
+        transaction_id - идентификатор редактируемой транзакции из БД приложения (только для purpose==edit)
+        transaction_date - дата совершения транзакции (только для purpose==edit)
+        category - наименование категории расходов
+        cost - сумма расходов (0 для новой транзакции, иначе - значение транзакции с указанным transaction_id)
+        note - заметка (пусто для новой транзакции, иначе - значение транзакции с указанным transaction_id)
+        @return: None
+        """
+        from libs.uix.baseclass.confirm_dialog import ConfirmDialog
+
+        def get_dialog_result(dialog_result, *args):
+            """
+            Метод, обрабатывающий результат выбора пользователя по удалению/нет транзакции с расходами. При
+            положительном ответе пользователя транзакция удаляется, в остальных случаях - нет.
+            @param dialog_result: ответ пользователя: 0 - пользователь нажал OK, -1 - пользователь нажал CANCEL
+            @param args:
+            @return: None; если dialog_result == 0, то транзакции удаляется, в остальных случаях нет.
+            """
+            # если пользователь нажал OK, то транзакция удаляется
+            if dialog_result == 0:
+                transaction_data = (data["transaction_id"], data["transaction_date"].strftime("%Y%m%d"))
+                result = self.__sql_worker.delete_transaction_data(transaction_data)
+                toast('Data deleted!' if len(result) == 0 else 'Error! Something went wrong.')
+                # после удаления обновляем страницы (экраны) приложения
+                self.__update_application_screens()
+            # диалоговое окно подтверждения операции удаления транзакции скрывается
+            dialog.dismiss()
+
+        # вызываем диалоговое окно для подтверждения удаления транзакции с расходами
+        dialog = ConfirmDialog(
+            title='Delete transaction?',
+            text='Are you sure you want to delete the transaction?',
+            result_func=get_dialog_result,
+        )
+        dialog.open()
 
     def show_calendar(self):
         """

@@ -245,7 +245,7 @@ class SQLWorker:
         Метод, используемый для добавления новых транзакци с расходами в БД.
         @param transaction_data: данные о новых расходах. AccountId - идентификатор счета, CategoryId - идентификатор
         категории расходов, DateKey - идентификатор даты транзакции, TransactionScore - сумма транзакции,
-        TransactionNote - заметка к транзакции)
+        TransactionNote - заметка к транзакции
         @return: None
         """
         query = \
@@ -257,9 +257,10 @@ class SQLWorker:
 
     def update_transaction_data(self, transaction_data):
         """
-        Метод, используемый для добавления новых транзакци с расходами в БД.
-        @param transaction_data: данные о новых расходах. CategoryId - идентификатор категории расходов, DateKey -
-        идентификатор даты транзакции, TransactionScore - сумма транзакции, TransactionNote - заметка к транзакции)
+        Метод, используемый для обновления данных о расходах в БД.
+        @param transaction_data: данные об обновляемой транзакции, а также новые данные о ней. CategoryId -
+        идентификатор категории расходов, DateKey - идентификатор даты транзакции, TransactionScore - сумма транзакции,
+        TransactionNote - заметка к транзакции, TransactionId - идентификатор обновляемой транзакции.
         @return: None
         """
         query = \
@@ -271,5 +272,21 @@ class SQLWorker:
                 TransactionScore = {transaction_data[2]},
                 TransactionNote = '{transaction_data[3]}'
             WHERE TransactionId = {transaction_data[4]}
+            """
+        return self.__execute_sql_request(query)
+
+    def delete_transaction_data(self, transaction_data):
+        """
+        Метод, используемый для удаления транзакций с расходами из БД.
+        @param transaction_data: данные о удаляемой транзакции. TransactionId - идентификатор удаляемой транзакции,
+        DateKey - идентификатор даты удаляемой транзакции
+        @return: None
+        """
+        query = \
+            f"""
+            DELETE FROM Transactions
+            WHERE 1=1
+                AND TransactionId = {transaction_data[0]}
+                AND DateKey = '{transaction_data[1]}'
             """
         return self.__execute_sql_request(query)
