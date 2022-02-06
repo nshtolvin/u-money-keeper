@@ -40,7 +40,7 @@ class PieChart(Screen):
                     ncol=2,
                     loc='lower center',
                     frameon=False,
-                    bbox_to_anchor=(0.5, -0.05))
+                    bbox_to_anchor=(0.5, -0.15))
 
         # задаем цвет и прозрачность фона диаграммы
         figure.patch.set_facecolor('whitesmoke')

@@ -31,7 +31,7 @@ from libs.sql_worker_lib import SQLWorker
 
 class MainApp(MDApp):
     title = 'PROJECT_NAME'
-    # icon = 'data/images/icon.png'
+    icon = 'data/images/icon.png'
     version = '0.0.0'
     nav_drawer = ObjectProperty()
     lang = StringProperty('en')
