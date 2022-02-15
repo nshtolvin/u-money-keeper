@@ -3,7 +3,6 @@
 
 # region Import
 from kivy.uix.screenmanager import Screen
-# from kivymd_extensions.akivymd.uix.charts import AKPieChart
 
 import matplotlib.pyplot as plt
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
@@ -28,8 +27,6 @@ class PieChart(Screen):
         обозначены категории расходов на диаграмме
         @return: None
         """
-        self.ids.chart_box.clear_widgets()  # очищаем виджет от диаграммы
-
         figure, axes = plt.subplots()
         # добавляем круговую диаграмму. Радиус внешний окружности = 1, радиус внутренней окружности = 0.45
         axes.pie(chart_data["data"], radius=1, wedgeprops=dict(width=0.45), colors=chart_data["colors"])

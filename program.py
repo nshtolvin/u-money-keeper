@@ -229,6 +229,20 @@ class MainApp(MDApp):
         """
         from threading import Thread
 
+        # результат выборки для TransactionsScreen
+        # (аналогичная выборка используется для построения столбчатой диаграммы с накоплением на StatisticsScreen)
+        transactions_for_transactions_screen = self.__sql_worker.make_select_for_transactions_screen(
+            from_date=self.__current_date[0],
+            to_date=self.__current_date[1]
+        )
+        # инициализация потока, обеспечивающего обработку выборки и загрузку виджетов для TransactionsScreen
+        transactions_screen_thread = Thread(
+            target=self.__update_transactions_screen(transactions_for_transactions_screen),
+            name='TransactionsScrThread',
+            daemon=True)
+        transactions_screen_thread.start()
+        transactions_screen_thread.join()
+
         # результат выборки для CategoriesScreen
         # (также используется для построения линейчатой диаграммы LineChart на StatisticsScreen)
         transactions_for_categories_screen = self.__sql_worker.make_select_for_categories_screen(
@@ -241,18 +255,16 @@ class MainApp(MDApp):
             # args=(bot_settings_1.settings, bot_users, ),
             name='CetegScrThread',
             daemon=True)
+        categories_screen_thread.start()
+        categories_screen_thread.join()
 
-        # результат выборки для TransactionsScreen
-        # (аналогичная выборка используется для построения столбчатой диаграммы с накоплением на StatisticsScreen)
-        transactions_for_transactions_screen = self.__sql_worker.make_select_for_transactions_screen(
-            from_date=self.__current_date[0],
-            to_date=self.__current_date[1]
-        )
-        # инициализация потока, обеспечивающего обработку выборки и загрузку виджетов для TransactionsScreen
-        transactions_screen_thread = Thread(
-            target=self.__update_transactions_screen(transactions_for_transactions_screen),
-            name='TransactionsScrThread',
+        # инициализация потока, обеспечивающего обработку выборки и загрузку виджета LineChart для StatisticsScreen
+        line_chart_thread = Thread(
+            target=self.__update_line_chart_on_statistics_screen(transactions_for_categories_screen),
+            name='LineChartThread',
             daemon=True)
+        line_chart_thread.start()
+        line_chart_thread.join()
 
         # результат выборки для построения столбчатой диаграммы с накоплением на StatisticsScreen (обязательно
         # осуществляется сортировка результатов по возрастанию дат транзакций
@@ -266,25 +278,8 @@ class MainApp(MDApp):
             target=self.__update_bar_chart_on_statistics_screen(transactions_for_bar_chart),
             name='BarChartThread',
             daemon=True)
-
-        # инициализация потока, обеспечивающего обработку выборки и загрузку виджета LineChart для StatisticsScreen
-        line_chart_thread = Thread(
-            target=self.__update_line_chart_on_statistics_screen(transactions_for_categories_screen),
-            name='LineChartThread',
-            daemon=True)
-
-        # запуск всех потоков по обработке данных и инициализации виджетами страниц приложения
-        categories_screen_thread.start()
-        categories_screen_thread.join()
-
-        transactions_screen_thread.start()
-        transactions_screen_thread.join()
-
         bar_chart_thread.start()
         bar_chart_thread.join()
-
-        line_chart_thread.start()
-        line_chart_thread.join()
 
     def __update_categories_screen(self, transactions):
         """
@@ -302,6 +297,7 @@ class MainApp(MDApp):
         left_btn_list.clear_widgets()
         right_btn_list = self.root.ids.main.ids.categories_screen.ids.right_btn_list
         right_btn_list.clear_widgets()
+        self.root.ids.main.ids.categories_screen.ids.pie_chart.ids.chart_box.clear_widgets()
 
         # определяем середину списка с данными, чтобы далее распределить кнопки с категориями по правую и левую
         # стороны от диаграммы PieChart
@@ -390,6 +386,8 @@ class MainApp(MDApp):
         """
         from datetime import datetime
 
+        self.root.ids.main.ids.statistics_screen.ids.bar_chart.ids.chart_box.clear_widgets()
+
         # словарь, в котором хранятся данные для построения диаграммы BarChart. Ключи:
         # data - список с суммами расходов по катеогриям (высота столбца)
         # dates - список с датами в которые осуществлялись расходы (значения по горизонтальной оси)
@@ -442,6 +440,8 @@ class MainApp(MDApp):
         @param transactions: список с данными (транзакции) о расходах
         @return: None
         """
+        self.root.ids.main.ids.statistics_screen.ids.line_chart.ids.chart_box.clear_widgets()
+
         # для построения диаграммы требуется отсортировать список транзакций (список картежей) по убыванию расходов
         sorted_transactions_by_costs = sorted(transactions, key=lambda tup: tup[3])
 
